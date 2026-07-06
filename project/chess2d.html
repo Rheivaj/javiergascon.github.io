@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Chess 2D Mobile - A responsive 2D Chess game built with Unity, playable in the browser with mobile optimization.">
+    <title>Chess 2D Mobile</title>
+    <link rel="icon" href="../assets/icon.png" type="image/png">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="../css/mediaquery-project.css">
+    <script src="script_chess2d.js" defer></script>
+    <style>
+        /* Mobile Device Mockup Frame Styles */
+        .mobile-mockup-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin: 3rem 0;
+            perspective: 1000px;
+        }
+
+        .mobile-device-container {
+            position: relative;
+            width: 360px;
+            height: 720px;
+            background: #0d0d0d;
+            border: 14px solid #1c1c1e;
+            border-radius: 48px;
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.5), 
+                0 0 0 4px #2c2c2e,
+                0 0 20px rgba(230, 0, 18, 0.15); /* Subtle red ambient glow to match theme */
+            overflow: hidden;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .mobile-device-container:hover {
+            transform: translateY(-5px) rotateX(2deg);
+            box-shadow: 
+                0 30px 60px -10px rgba(0, 0, 0, 0.6), 
+                0 0 0 4px #2c2c2e,
+                0 0 30px rgba(230, 0, 18, 0.3);
+        }
+
+        /* Screen Notch / Dynamic Island simulation */
+        .mobile-notch {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 110px;
+            height: 24px;
+            background: #000;
+            border-radius: 12px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-notch::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #111133;
+            border-radius: 50%;
+            margin-left: 60px;
+            box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.5);
+        }
+
+        /* The Game Iframe */
+        .mobile-screen-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            background: #1a1a1a;
+            padding-top: 20px; /* Offset for the notch area */
+        }
+
+        /* Instructions & play tips below the device */
+        .play-instruction {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--nintendo-grey);
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .play-instruction svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--nintendo-red);
+        }
+
+        /* Responsive Scaling for Small Viewports */
+        @media (max-width: 480px) {
+            .mobile-device-container {
+                transform: scale(0.85);
+                margin: -40px 0;
+            }
+            .mobile-device-container:hover {
+                transform: scale(0.85) translateY(-5px);
+            }
+        }
+
+        @media (max-width: 380px) {
+            .mobile-device-container {
+                transform: scale(0.72);
+                margin: -80px 0;
+            }
+            .mobile-device-container:hover {
+                transform: scale(0.72) translateY(-5px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="health-bar-container">
+        <div id="health-bar-fill"></div>
+        <div id="health-bar-text">HP: 100/100</div>
+    </div>
+
+    <header class="navbar">
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#contributions">Development</a></li>
+                <li><a href="../assets/resume/Javier_Gascon_Resume.pdf">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <button id="lang-toggle">Español</button>
+            </ul>
+        </nav>
+        <button class="hamburger">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </button>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const hamburger = document.querySelector('.hamburger');
+                const navMenu = document.querySelector('.navbar nav');
+
+                hamburger.addEventListener('click', function () {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+
+                navMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function () {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            });
+        </script>
+    </header>
+
+    <section id="project">
+        <div class="container fade-in">
+            <h1>Chess 2D Mobile</h1>
+
+            <div class="project-overview">
+                <div class="project-info">
+                    <div class="social-icons">
+                        <span class="social-icon" title="Unity WebGL Game">
+                            <img src="../assets/icons/unity.svg" alt="Unity Engine Logo">
+                        </span>
+                    </div>
+                    <div class="info-item">
+                        <p>Primary Focus: <b>Mobile UI/UX & WebGL Deployment</b></p>
+                    </div>
+                </div>
+                <span class="tags">
+                    <span class="tag">WebGL</span>
+                    <span class="tag">Unity</span>
+                    <span class="tag">C#</span>
+                    <span class="tag">Chess Engine</span>
+                    <span class="tag">Mobile Game</span>
+                    <span class="tag">2D Gameplay</span>
+                </span>
+
+                <p class="project-description">
+                    Play this beautiful 2D Chess game, designed specifically for mobile devices, directly in your browser. This project showcases standard chess rules, board state evaluations, clean user interface animations, and a seamless mobile WebGL deployment.
+                </p>
+                <p class="project-description">
+                    The gameplay has been fully optimized to work on touch screens, featuring responsive canvas resizing and light resource consumption.
+                </p>
+
+                <!-- Embedded Game inside Mobile Mockup Frame -->
+                <div class="mobile-mockup-wrapper">
+                    <div class="mobile-device-container">
+                        <div class="mobile-notch"></div>
+                        <iframe src="../ChessMovil/index.html" class="mobile-screen-iframe" title="Chess 2D Mobile WebGL Game" allow="fullscreen"></iframe>
+                    </div>
+                    <div class="play-instruction">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        <span>Tip: Play with touch gestures or mouse drag-and-drop!</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <h2 class="fade-in">Core Features</h2>
+            <div class="contributions" id="contributions">
+
+                <div class="contribution-item fade-in">
+                    <h3>Gameplay & Chess Rules Engine</h3>
+                    <span class="tags">
+                        <span class="tag">C#</span>
+                        <span class="tag">Game Logic</span>
+                        <span class="tag">Rules Engine</span>
+                    </span>
+                    <p>Implemented core chess mechanics and validation systems including:</p>
+                    <ul>
+                        <li><b>Move Validation:</b> Accurate logic for all classic pieces (pawns, knights, bishops, rooks, queens, kings).</li>
+                        <li><b>Special Rules:</b> Support for castling, en passant, and pawn promotion.</li>
+                        <li><b>Game Loop:</b> Turn-based system with detection for check, checkmate, and stalemate.</li>
+                    </ul>
+                    <p>The rules engine is designed to be robust, preventing invalid board configurations.</p>
+                </div>
+
+                <div class="contribution-item fade-in">
+                    <h3>Mobile UI/UX Design</h3>
+                    <span class="tags">
+                        <span class="tag">UI/UX</span>
+                        <span class="tag">Responsive Canvas</span>
+                        <span class="tag">Touch Controls</span>
+                    </span>
+                    <p>Focused on creating a smooth and pleasant experience for touch devices:</p>
+                    <ul>
+                        <li><b>Responsive Layout:</b> The game canvas automatically adapts to vertical orientations typical of mobile screens.</li>
+                        <li><b>Touch Inputs:</b> Drag-and-drop mechanics optimized for precise touch screen control.</li>
+                        <li><b>Minimalist Aesthetics:</b> Clean visual design that minimizes distractions and enhances readability of the board.</li>
+                    </ul>
+                    <p>This ensures the game remains highly playable on all screen sizes.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="fade-in">
+        <h2 id="contact-title">Contact</h2>
+        <p class="contact-text">
+            You can reach me via email at:
+            <a href="mailto:javier.gascon.14@gmail.com">javier.gascon.14@gmail.com</a>
+        </p>
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/javier-gascon-pinedo/" class="social-icon" target="_blank"
+                rel="noopener noreferrer">
+                <img src="../assets/icons/linkedin-white.svg" alt="LinkedIn">
+            </a>
+        </div>
+        <p class="copyright">
+            &copy; 2025 Javier Gascón Pinedo. All rights reserved.
+        </p>
+    </section>
+</body>
+
+</html>

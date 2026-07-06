@@ -135,6 +135,9 @@ document.addEventListener('DOMContentLoaded', function () {
             proj_unitypathway_title: 'Unity Junior Programmer Pathway',
             proj_unitypathway_desc: 'Completed the official Junior Programmer Pathway, covering everything from core C# programming to OOP, functional UIs, and data persistence in engine.',
 
+            proj_chess2d_title: 'Chess 2D Mobile',
+            proj_chess2d_desc: 'A 2D Chess game optimized for mobile devices, built with Unity and playable directly in the browser.',
+
             contact_text: 'You can reach me via email at:',
             filter_all: 'All',
             filter_cpp: 'C++',
@@ -184,6 +187,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             proj_unitypathway_title: 'Unity Junior Programmer Pathway',
             proj_unitypathway_desc: 'Completado el curso oficial Junior Programmer Pathway, abarcando desde fundamentos de C# hasta POO, interfaces (UIs) funcionales y persistencia de datos en el motor.',
+
+            proj_chess2d_title: 'Ajedrez 2D Móvil',
+            proj_chess2d_desc: 'Un juego de ajedrez en 2D optimizado para dispositivos móviles, desarrollado con Unity y jugable directamente en el navegador.',
 
             contact_text: 'Puedes contactarme vía email en:',
             filter_all: 'Todos',
